@@ -1,0 +1,40 @@
+V1 Modelo.
+User (manejarlo con django despues)
+
+Reserva [
+	idReserva,
+	idPropiedad,
+	idUser,
+	periodoFechas(array),
+	precioFinal
+	]
+
+Propiedad [
+	idPropiedad,
+	idUser,
+	idCiudad,
+	precioDia,
+	img,
+	categoria,
+	descripcionFicha,
+	tituloFicha,
+	maximoPersonas,
+	dormitorios,
+	camas,
+	baños,
+	periodoFechasAlquiler(array),
+	servicios(array),
+	]
+
+Servicios [
+	idServicio,
+	nombre,
+	img
+	]
+
+fechaAlquiler [
+	fecha,
+	idPropiedad
+	]	
+
+	]	
