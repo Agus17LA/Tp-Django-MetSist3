@@ -36,5 +36,3 @@ fechaAlquiler [
 	fecha,
 	idPropiedad
 	]	
-
-	]	

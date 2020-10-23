@@ -1,0 +1,41 @@
+directorio -> django-admin startproject nombre_proyectto
+directorio newproyect -> python manage.py startapp nombreapp
+
+python manage.py runserver //correr programa
+
+https://docs.djangoproject.com/en/3.1/topics/db/models/ --> docu models
+
+NO OLVIDAR DE GUARDAR LA APP CREADA EN settings.py -> installed apps
+
+BD sqlite
+python manage.py check nombreapp
+python manage.py makemigrations
+python manage.py sqlmigrate nombreapp versionapp
+python manage.py migrate
+python manage.py shell  (para trabajar con bd)
+(en shell)
+from nombreapp.models import Tabla
+obj=Tabla(value1= x,value2=y....)
+obj.save()
+
+obj=Tabla.objects.create(value1=x,value2=y...)
+
+obj.precio=x
+obj.save()   //esto es un update
+
+obj=Tabla.objects.get(id=6)
+obj.delete()
+
+Lista=Articulos.objects.all()
+Lista.query.__str__() 
+
+postgreSQL 
+
+pip install psycopg2  // es para instalar la libreria que usa postgre
+
+makemigrations //creo que hace algo como guardar los cambios del codigo en una bd fantasma de django
+migrate //este comando guarda todo en nuestra bd
+
+
+python -m pip install Pillow (para las imagenes o algo asi)
+

@@ -1,0 +1,10 @@
+python manage.py check nombreapp
+python manage.py makemigrations
+python manage.py sqlmigrate nombreapp versionapp
+python manage.py migrate
+
+nombreapp es el de la aplicacion, no el proyecto, y version es la que te tira despues de hacer makemigrations
+
+ej
+
+python manage.py sqlmigrate hostapp 0003
