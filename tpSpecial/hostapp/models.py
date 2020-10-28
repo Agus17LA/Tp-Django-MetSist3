@@ -1,6 +1,7 @@
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
+from multiselectfield import MultiSelectField
 
 
 # No se si poner reservation o booking,
@@ -20,11 +21,6 @@ class Property(models.Model):
     beds = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Camas", default=1)
     bathrooms = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Baños", default=1)
     image = models.ImageField(null=True)
-<<<<<<< Updated upstream
-    # periodoFechasAlquiler(array)
-    # servicios(array)
-    # esto se llama choice, el primer dato sale en la bd, el segundo es con el que se trabaja (rezemos)
-=======
     # esto se llama choice, el primer dato se guarda en la bd, el segundo es el q se muestra en el admin al addear
     SERVICE_CHOICES = (
         ('Se admiten mascotas', 'Admiten mascotas'),
@@ -57,7 +53,6 @@ class Property(models.Model):
     )
     # https://pypi.org/project/django-multiselectfield/
     services = MultiSelectField(choices=SERVICE_CHOICES, min_choices=1, default="No tiene servicios")
->>>>>>> Stashed changes
     CATEGORY_CHOICES = (
         ('Bungaló', 'Bungaló'),
         ('Cabaña', 'Cabaña'),
@@ -76,23 +71,17 @@ class Property(models.Model):
 # https://gist.github.com/bradmontgomery/1c52b799c4ad274e0cbdd012a8b18f10 Discutir si esto es usable.
 
 
-class Service(models.Model):
-    name = models.CharField(max_length=20)
-    image = models.ImageField(null=True)
-
-
 class Reservation(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.CharField(max_length=30, verbose_name="Usuario que reservó")
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-<<<<<<< Updated upstream
     final_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
-    # periodoFechasAlquiler(array)
-=======
+    code = models.CharField(null=True, max_length=50, verbose_name="El codigo de la reserva")
+
+
+class ReservationDate(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
     reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True)
     date = models.DateField(default="1998-7-27", null=True)
-    code = models.CharField(null=True, max_length=50, verbose_name="El codigo de la reserva")
+
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades
 # TODO tmb falta ver como manejar exactamente las fechas
->>>>>>> Stashed changes
-
-# TODO Falta agregar el array de fechas y de servicios, decidir tamaño de imagenes

@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from .models import *
 
-# Create your views here.
+
+def index(request):
+    properties = Property.objects.all()
+    context = {'properties': properties}
+    return render(request, "index.hmtl", context)
+
