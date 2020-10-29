@@ -15,7 +15,7 @@ class Property(models.Model):
     # https://docs.djangoproject.com/en/1.10/ref/validators/
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
     description = models.CharField(max_length=500, verbose_name="Descripcion de la Ficha")
-    title = models.CharField(max_length=20, verbose_name="Titulo de la Ficha")
+    title = models.CharField(max_length=40, verbose_name="Titulo de la Ficha")
     max_persons = models.PositiveIntegerField(verbose_name="Maximo personas", default=1)
     bedrooms = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Dormitorios", default=1)
     beds = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Camas", default=1)
