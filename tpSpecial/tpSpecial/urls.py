@@ -18,9 +18,13 @@ from django.conf.urls.static import static
 from django.urls import path
 from hostapp import views
 from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', views.index),
+    path('properties/', views.list_properties),
+    path('homescreen/', views.homescreen),
+    path('property/', views.property_page),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

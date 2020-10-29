@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Properties</title>
+</head>
+<body>
+    {% for property in properties %}
+    <table>
+        <tr>{{ property.title }}</tr>
+        <tr>
+            <td>{{ property.image }}</td>
+            <td>
+                <tr>Host: {{ property.user }}</tr>
+                <tr>Ciudad: {{ property.city }}</tr>
+                <tr>Categoría: {{ property.category }}</tr>
+                <tr>Precio por día: ${{ property.price_per_day }}</tr>
+                <tr>Habitaciones: {{ property.bedrooms }} / Camas: {{ property.beds }} / Baños: {{ property.bathrooms }}</tr>
+                <tr>Descripción: {{ property.description }}</tr>
+                <tr>Servicios: 
+                    <ol>
+                        {% for service in services %}
+                            <li>{{ service }}</li>
+                        {% endfor %}
+                    </ol>
+                </tr>
+            </td>
+        </tr>
+    </table>
+
+    {% endfor %}
+    
+</body>
+</html>
