@@ -22,13 +22,13 @@
         <div class="info-to-send">
             <h2>{{ property_aux.title }}</h2>
             <form action="../reservation/" method="POST">
-                <input type="text" placeholder="Nombre">
-                <input type="text" placeholder="Apellido">
-                <input type="email" placeholder="E-mail">
+                <input type="text" name="nombre" placeholder="Nombre">
+                <input type="text" name="apellido" placeholder="Apellido">
+                <input type="email" name="email" placeholder="E-mail">
                 <input type="text" name="daterange" id="date-range" onchange="chargeValues()" value="" />
-                <input  type="hidden" value="{{ property_aux.id }}" value="">
-                <input  type="hidden" id="final-price-input" value="" >
-                <input  type="hidden" id="quantity-days" value="" >
+                <input type="hidden" name="property_id" value="{{ property_aux.id }}" value="">
+                <input type="hidden" name="final_price" id="final-price-input" value="" >
+                <input type="hidden" name="quantity-days"  id="quantity-days" value="" >
                 <p>Precio final: $<span id="final-price">-</span></p>
                 <button>RESERVAR</button>
             </form>
