@@ -80,7 +80,7 @@ class Reservation(models.Model):
 
 class ReservationDate(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank= True )
     date = models.DateField(default="1998-7-27", null=True)
 
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades
