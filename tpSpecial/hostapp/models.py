@@ -2,20 +2,29 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.conf import settings
 from multiselectfield import MultiSelectField
+from django.contrib.auth.models import User
+
 
 
 # No se si poner reservation o booking,
 
 
+class City(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Property(models.Model):
     # settings.AUTH_USER_MODEL --> referencia al modelo User base de Django
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, editable=False, null=True)
     # verbose_name --> es el nombre con el que va a aparecer en el admin
-    city = models.CharField(max_length=50, verbose_name="Ciudad")
+    city = models.ForeignKey(City, on_delete=models.CASCADE)
     # https://docs.djangoproject.com/en/1.10/ref/validators/
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
-    description = models.CharField(max_length=500, verbose_name="Descripcion de la Ficha")
     title = models.CharField(max_length=40, verbose_name="Titulo de la Ficha")
+    description = models.CharField(max_length=500, verbose_name="Descripcion de la Ficha")
     max_persons = models.PositiveIntegerField(verbose_name="Maximo personas", default=1)
     bedrooms = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Dormitorios", default=1)
     beds = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Camas", default=1)
@@ -68,11 +77,17 @@ class Property(models.Model):
     )
     category = models.CharField(max_length=100, choices=CATEGORY_CHOICES)
 
+    def __str__(self):
+        return self.title
+
+
 # https://gist.github.com/bradmontgomery/1c52b799c4ad274e0cbdd012a8b18f10 Discutir si esto es usable.
 
 
 class Reservation(models.Model):
-    user = models.CharField(max_length=30, verbose_name="Usuario que reservó")
+    userFirstName = models.CharField(max_length=30, verbose_name="Nombre del usuario que reservó", default="nombre")
+    userLastName = models.CharField(max_length=30, verbose_name="Apellido del usuario que reservó", default="apellido")
+    email = models.EmailField(verbose_name="Email del usuario", default="mail@prueba.com")
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
     code = models.CharField(null=True, max_length=50, verbose_name="El codigo de la reserva")
@@ -80,7 +95,7 @@ class Reservation(models.Model):
 
 class ReservationDate(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank= True )
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank=True, editable= False)
     date = models.DateField(default="1998-7-27", null=True)
 
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades
