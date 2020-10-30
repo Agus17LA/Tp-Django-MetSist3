@@ -23,7 +23,7 @@
         </div>
         <div class="container_info" style="text-align: left;">
             <div class="info">
-                <span>{{ property.city }}</span>
+                <span>{{ property.city.name }}</span>
                 <span>{{ property.category }}</span>
             </div>
             <h1 class="title">{{ property.title }}</h1>
@@ -31,7 +31,7 @@
                 {{ property.description }} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore consequuntur quia consequatur quam inventore obcaecati, hic vero iste, tempora aliquid facilis. Rerum, nihil voluptatem! Ipsam voluptatum quidem earum quisquam totam!
             </p>
             
-            <a href="#" class="see-more">Ver más</a>
+            <a href="../property_page/?id_property={{ property.id }}" class="see-more">Ver más</a>
             <p class="price">{{property.price_per_day}}/noche</p>
         </div>
     </div>  

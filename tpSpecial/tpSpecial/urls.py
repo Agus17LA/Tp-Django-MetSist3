@@ -24,7 +24,7 @@ urlpatterns = [
     path('index/', views.index),
     path('properties/', views.list_properties),
     path('homescreen/', views.homescreen),
-    path('property/', views.property_page),
+    path('property_page/', views.property_page),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

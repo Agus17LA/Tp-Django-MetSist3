@@ -1,48 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/property_page.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style-single-page.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <title>HostBooking</title>
 </head>
 <body>
-    <!-- Pantalla dividida en dos, del lado izquierdo una foto de la propiedad
-    del lado derecho todos los datos de la misma más un botón de reservar que llevaría al admin
-    para completar los datos necesarios del usuario y procesar la reserva -->
-    <div class="split left">
-        <div class="centered">
-          <img src="{{ property_aux.image }}" alt="Image">
+    <header>
+        <h1>HostBooking</h1>
+    </header>
+    <div class="container">
+        <div class="img-container">
+            <img src="{{ property_aux.image.url }}" alt="">
         </div>
-      </div>
-      
-      <div class="split right">
-        <div class="centered">
-          <h2>{{ property_aux.title }}</h2>
-          <p>{{ property_aux.category }} / {{ property_aux.city }}</p>
-          <p>{{ property_aux.description }}</p>
-          <p>
-              <b>
-                <i class="fas fa-door-closed"></i> {{ property_aux.bedrooms }}
-                <i class="fas fa-bed"></i> {{ property_aux.beds }}
-                <i class="fas fa-toilet"></i> {{ property_aux.bathrooms }}
-                <i class="fas fa-user"></i> {{ property_aux.max_persons }}
-              </b>
-          </p>
-          <p>
-              <!-- ver como agregar el tema de los servicios y el rango de fechas disponible -->
-          </p>
-          <p>
-              <h3>{{ property_aux.price_per_day }}</h3>
-          </p>
-          <p>
-            <form action="../admin/"> <!-- fijarse como enviar al admin y que vea directamente la pagina 
-            de la reserva en cuestion para completar los datos faltantes-->
-                <input type="submit" class="btn btn-success" value="Reservar">
+        <div class="info-to-send">
+            <h2>{{ property_aux.title }}</h2>
+            <form action="">
+                <input type="text" placeholder="Nombre">
+                <input type="text" placeholder="Apellido">
+                <input type="email" placeholder="E-mail">
+                <input type="text" name="daterange" id="date-range" onchange="chargeValues()" value="" />
+                <input  type="hidden" value="{{ property_aux.id }}" value="">
+                <input  type="hidden" id="final-price-input" value="" >
+                <input  type="hidden" id="quantity-days" value="" >
+                <p>Precio final: $<span id="final-price">-</span></p>
+                <button>RESERVAR</button>
             </form>
-          </p>
+            <input  id="price-per-day" type="hidden" value="{{property_aux.price_per_day}}">
         </div>
-      </div>
+    </div>
 </body>
+    <script>
+        $(function() {
+          $('input[name="daterange"]').daterangepicker({
+              opens: 'left'              
+          }, function(start, end, label) {
+            
+              console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+          });
+
+          
+
+        });
+        function chargeValues(){
+          var dates = document.getElementById("date-range").value;
+          var array_dates = dates.split(" - ");
+          console.log(array_dates)
+          var first_date = array_dates[0].split("/");
+          var second_date = array_dates[1].split("/");
+          console.log(first_date);
+          console.log(second_date);
+          var diff = Math.abs(new Date(first_date[2],first_date[0],first_date[1]) - new Date(second_date[2],second_date[0],second_date[1]));
+          var days = diff / (1000 * 3600 * 24);
+          console.log(days+" ->days");
+          document.getElementById("quantity-days").value = days;
+          var final_price = document.getElementById("price-per-day").value * days;
+          document.getElementById("final-price-input").value = final_price;
+          $("#final-price").empty();
+          $("#final-price").html(final_price);
+
+        }
+        
+
+    </script>
+
 </html>
