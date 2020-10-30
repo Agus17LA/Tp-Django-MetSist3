@@ -32,3 +32,10 @@ def property_page(request):
         property_aux = Property.objects.get(id=id_property)
         return render(request, template_name="property_page.html", context={'property_aux': property_aux})
 
+def reservation(request):
+    if request.POST:
+        if(){
+            return render(request, template_name="success.html")
+        }else{
+            return render(request, template_name="error.html")
+        }
