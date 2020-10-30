@@ -4,117 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
-    <!-- estilo de las cards de cada property con efecto visual-->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    <!-- estilo de la barra que filtra propiedades por categoría -->
-    <link rel="stylesheet" href="{% static 'css/filter_bar.css' %}">
-    <title>HostApp</title>
+    <title>HostBooking</title>
 </head>
-<body>
-    <head>
-        <nav>
-            <div class="filter-bar">
-                <!-- botones que sirven para filtrar por categorías las propiedades -->
-                <div id="myBtnContainer">
-                    <button class="btn active" onclick="filterSelection('all')"> Mostrar todas</button>
-                    <button class="btn" onclick="filterSelection('Bungaló')"> Bungaló</button>
-                    <button class="btn" onclick="filterSelection('Cabaña')"> Cabaña</button>
-                    <button class="btn" onclick="filterSelection('Casa Comunal')"> Casa Comunal</button>
-                    <button class="btn" onclick="filterSelection('Casa de Huéspedes')"> Casa de Huéspedes</button>
-                    <button class="btn" onclick="filterSelection('Casa Entera')"> Casa Entera</button>
-                    <button class="btn" onclick="filterSelection('Chalé')"> Chalé</button>
-                    <button class="btn" onclick="filterSelection('Departamento')"> Departamento</button>
-                    <button class="btn" onclick="filterSelection('Duplex')"> Duplex</button>
-                    <button class="btn" onclick="filterSelection('Loft')"> Loft</button>
-                    <button class="btn" onclick="filterSelection('Mansión')"> Mansión</button>
-                    <button class="btn" onclick="filterSelection('Villa Residencial')"> Villa Residencial</button>
-                  </div>
-            </div>
-        </nav>
-    </head>
-    
-    <!-- <div class="row">
-        {% for property in properties %}
-        <div class="filterDiv {{ property.category }}">
-            <div class="card-container" >
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="{{ property.image }}" alt="Image" style="width:300px;height:300px;">
-                            <div>
-                                <h4><b>{{ property.title }}</b></h4>
-                                <p>{{ property.category }} - {{ property.city }}</p>
-                                <p>
-                                    <b>
-                                        <i class="fas fa-door-closed"></i> {{ property.bedrooms }}
-                                        <i class="fas fa-bed"></i> {{ property.beds }}
-                                        <i class="fas fa-toilet"></i> {{ property.bathrooms }}
-                                    </b>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="flip-card-back">
-                            <p>{{ property.description }}</p>
-                            <p>
-                                <form action="../property_page/?id_property={{ property.id }}">
-                                    <input type="submit" class="btn btn-success" value="Leer más">
-                                </form>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<header>
+    <h1>HostBooking</h1>
+    <select name="" id="">
+        {% for category in categories  %}
+        <option value="" onclick="filterSelection('{{ category.0 }}')"> {{ category.0 }}</option>
         {% endfor %}
-    </div> -->
-
-    
-        <div class="wrapper">
-            <div class="cards_wrap">
-            {% for property in properties %}
-            <div class="filterDiv {{ property.category }}">
-                <div class="card_item">
-                    <div class="card_inner">
-                        <div class="card_top">
-                            <img src="{{ property.image.url }}" alt="Image">
-                        </div>
-                        <div class="card_bottom">
-                            <div class="card_category">
-                                Travel
-                            </div>
-                            <div class="card_info">
-                                <p class="title">
-                                    {{ property.title }}
-                                </p>
-                                <p>{{ property.category }} / {{ property.city }}</p>
-                                <p>{{ property.description }}</p>
-                                <p>
-                                    <b>
-                                        <i class="fas fa-door-closed"></i> {{ property.bedrooms }}
-                                        <i class="fas fa-bed"></i> {{ property.beds }}
-                                        <i class="fas fa-toilet"></i> {{ property.bathrooms }}
-                                    </b>
-                                </p>
-                            </div>
-                            <div class="card_creator">
-                                <p>Publicado por {{ property.user }}</p>
-                                <p>
-                                    <form action="../property_page/?id_property={{ property.id }}">
-                                        <input type="submit" class="btn btn-success" value="Leer más">
-                                    </form>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-                {% endfor %}
-            </div>
+    </select>
+</header>
+<body>
+    {% for property in properties %}
+    <div class="card filterDiv {{ property.category }}">  
+        <div class="img-container">
+            <img src="{{ property.image.url }}" alt="">
         </div>
+        <div class="container_info" style="text-align: left;">
+            <div class="info">
+                <span>{{ property.city }}</span>
+                <span>{{ property.category }}</span>
+            </div>
+            <h1 class="title">{{ property.title }}</h1>
+            <p class="desc">
+                {{ property.description }} Lorem ipsum, dolor sit amet consectetur adipisicing elit. Labore consequuntur quia consequatur quam inventore obcaecati, hic vero iste, tempora aliquid facilis. Rerum, nihil voluptatem! Ipsam voluptatum quidem earum quisquam totam!
+            </p>
+            
+            <a href="#" class="see-more">Ver más</a>
+            <p class="price">{{property.price_per_day}}/noche</p>
+        </div>
+    </div>  
+    {% endfor %}
     
-
-
-    <!-- js para el filtro de las propiedades -->
-    <script src="{% static 'js/filter_bar.js' %}"></script>
 </body>
 </html>

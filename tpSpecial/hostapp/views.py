@@ -13,7 +13,9 @@ def index(request):
 
 def homescreen(request):
     properties = Property.objects.all()
-    return render(request, template_name="index.html", context={'properties' : properties})
+    list_categories = list(Property.CATEGORY_CHOICES)
+    print(list_categories)
+    return render(request, template_name="index.html", context={'properties' : properties, 'categories' : list_categories})
 
 #lista basica y generica para ver todas las properties
 def list_properties(request):
