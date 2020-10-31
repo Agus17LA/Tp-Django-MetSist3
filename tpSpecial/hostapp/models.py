@@ -23,7 +23,7 @@ class Property(models.Model):
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     # https://docs.djangoproject.com/en/1.10/ref/validators/
     price_per_day = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
-    title = models.CharField(max_length=40, verbose_name="Titulo de la Ficha")
+    title = models.CharField(max_length=50, verbose_name="Titulo de la Ficha")
     description = models.CharField(max_length=500, verbose_name="Descripcion de la Ficha")
     max_persons = models.PositiveIntegerField(verbose_name="Maximo personas", default=1)
     bedrooms = models.PositiveIntegerField(validators=[MinValueValidator(1)], verbose_name="Dormitorios", default=1)
@@ -85,21 +85,22 @@ class Property(models.Model):
 
 
 class Reservation(models.Model):
-    userFirstName = models.CharField(max_length=30, verbose_name="Nombre del usuario que reservó", default="nombre")
-    userLastName = models.CharField(max_length=30, verbose_name="Apellido del usuario que reservó", default="apellido")
+    userFirstName = models.CharField(max_length=50, verbose_name="Nombre del usuario que reservó", default="nombre")
+    userLastName = models.CharField(max_length=50, verbose_name="Apellido del usuario que reservó", default="apellido")
     email = models.EmailField(verbose_name="Email del usuario", default="mail@prueba.com")
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    final_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
+    final_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)], null=True)
     code = models.CharField(null=True, max_length=50, verbose_name="El codigo de la reserva")
     date_of_reservation = models.DateField(default="2020-10-31", null=True)
 
 
 class ReservationDate(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank=True, editable=True)
-    date = models.DateField(default="1998-7-27", null=True)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank=True, editable=False)
+    date = models.DateField(default="2020-10-31", null=True)
 
     def __str__(self):
+        # puse mal los 2 puntitos pero ya es muy tarde para cambiarlo sin causar una catastrofe
         return self.date.strftime("%Y:%m:%d")
 
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades

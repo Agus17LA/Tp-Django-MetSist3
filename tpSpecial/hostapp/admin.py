@@ -9,7 +9,7 @@ class ReservationDateInline(admin.TabularInline):
     model = ReservationDate
     fk_name = 'property'
     min_num = 0
-    max_num = 7
+    max_num = 100
 
 
 class PropertyAdmin(admin.ModelAdmin):
