@@ -34,9 +34,14 @@ class ReservationAdmin(admin.ModelAdmin):
     list_display = ("property", "userFirstName", "final_price")
 
 
+
+
+
 class ReservationDateAdmin(admin.ModelAdmin):
     list_display = ("property", "reservation", "date")
-    exclude = ("Reservation",)
+    #exclude = ("Reservation",)
+    list_filter = ("date", "property")
+    date_hierarchy = "date"
 
 
 class CityAdmin(admin.ModelAdmin):

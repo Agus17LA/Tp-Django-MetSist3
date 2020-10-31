@@ -22,7 +22,7 @@
         
         <div class="info-to-send">
             <h2>{{ property_aux.title }}</h2>
-            <form action="../reservation/" method="POST">
+            <form action="../reservation/" method="POST">{% csrf_token %}
                 <input type="text" name="nombre" placeholder="Nombre">
                 <input type="text" name="apellido" placeholder="Apellido">
                 <input type="email" name="email" placeholder="E-mail">
@@ -31,7 +31,7 @@
                 <input type="hidden" name="final_price" id="final-price-input" value="" >
                 <input type="hidden" name="quantity-days"  id="quantity-days" value="" >
                 <p>Precio final: $<span id="final-price">-</span></p>
-                <button>RESERVAR</button>
+                <button type="submit">RESERVAR</button>
             </form>
             <input  id="price-per-day" type="hidden" value="{{property_aux.price_per_day}}">
         </div>
@@ -72,7 +72,7 @@
           console.log(first_date);
           console.log(second_date);
           var diff = Math.abs(new Date(first_date[2],first_date[0],first_date[1]) - new Date(second_date[2],second_date[0],second_date[1]));
-          var days = diff / (1000 * 3600 * 24);
+          var days = 1 + (diff / (1000 * 3600 * 24)) ;
           console.log(days+" ->days");
           document.getElementById("quantity-days").value = days;
           var final_price = document.getElementById("price-per-day").value * days;
