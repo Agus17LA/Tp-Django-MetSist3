@@ -100,7 +100,6 @@ class ReservationDate(models.Model):
     date = models.DateField(default="2020-10-31", null=True)
 
     def __str__(self):
-        # puse mal los 2 puntitos pero ya es muy tarde para cambiarlo sin causar una catastrofe
         return self.date.strftime("%Y-%m-%d")
 
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades
