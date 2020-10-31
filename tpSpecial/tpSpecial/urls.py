@@ -21,12 +21,13 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', views.index),
+    path('index/', views.homescreen),
     path('homescreen/', views.homescreen),
     path('property_page/', views.property_page),
     path('success/', views.success),
     path('error/', views.error),
-    path('reservation/', views.reservation)
+    path('reservation/', views.reservation),
+    path('', views.homescreen)
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
