@@ -50,7 +50,7 @@ class CityAdmin(admin.ModelAdmin):
 
 admin.site.register(Property, PropertyAdmin)
 admin.site.register(Reservation, ReservationAdmin)
-admin.site.register(ReservationDate, ReservationDateAdmin)
+#admin.site.register(ReservationDate, ReservationDateAdmin)
 admin.site.register(City, CityAdmin)
 
 

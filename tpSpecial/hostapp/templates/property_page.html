@@ -43,6 +43,13 @@
             <img class="img-info" src="{% static 'img/bedroom.png'%}" alt=""><p>{{ property_aux.bedrooms }}</p>
             <img class="img-info" src="{% static 'img/bed.png'%}" alt=""><p>{{ property_aux.beds }}</p>
             <img class="img-info" src="{% static 'img/bathroom.png'%}" alt=""><p>{{ property_aux.bathrooms }}</p>
+            <p></p>
+            <select name="" id="" style="width: 100%;">
+                <option value="" selected disabled hidden>Fechas disponibles</option>
+                {%for date in available_dates%}
+                <option value="">{{date}}</option>
+                {% endfor %}
+            </select>
         </div>
         <script>
             var myDiv = $('#description');
