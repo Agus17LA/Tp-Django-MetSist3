@@ -13,10 +13,9 @@ def index(request):
 
 def homescreen(request):
     properties = Property.objects.all()
-    list_categories = list(Property.CATEGORY_CHOICES)
-    return render(request, template_name="index.html",
-                  context={'properties': properties, 'categories': list_categories})
-
+    cities = City.objects.all()
+    
+    return render(request, template_name="index.html", context={'properties' : properties, 'cities' : cities})
 
 # lista basica y generica para ver todas las properties
 def list_properties(request):
@@ -35,6 +34,12 @@ def property_page(request):
         property_aux = Property.objects.get(id=id_property)
         return render(request, template_name="property_page.html", context={'property_aux': property_aux})
 
+
+def success(request):
+    return render(request, template_name="success.html")
+
+def error(request):
+    return render(request, template_name="error.html")
 
 def reservation(request):
     if request.POST:

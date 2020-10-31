@@ -5,25 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
     <title>HostBooking</title>
 </head>
 <header>
     <h1>HostBooking</h1>
-    <select name="" id="">
-        {% for category in categories  %}
-        <option value="" onclick="filterSelection('{{ category.0 }}')"> {{ category.0 }}</option>
-        {% endfor %}
-    </select>
+    <div style="display: flex; ">
+        <p style="margin-right: 10px;">Cantidad de personas:</p>
+        <input type="text" id="inpt-prsns" style="height: 30px; margin-top: 25px; width: 30px; border: none; outline: none; padding-left: 5px ;" onchange="filterMaxPersons()">
+    </div>
+    <div style="display: flex; ">
+        <p style="margin-right: 10px;">Ciudad: </p>
+        <select id="select_filter" onchange="filterSelectionCity()">
+            <option value="All" > All </option>
+            {% for city in cities  %}
+            <option value="{{ city.name|cut:' ' }}" > {{ city.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
 </header>
 <body>
     {% for property in properties %}
-    <div class="card filterDiv {{ property.category }}">  
+    <div class="card  mx-persons-{{property.max_persons}} {{ property.city.name|cut:' ' }} ">  
         <div class="img-container">
             <img src="{{ property.image.url }}" alt="">
         </div>
         <div class="container_info" style="text-align: left;">
             <div class="info">
-                <span>{{ property.city.name }}</span>
+                <span id="city">{{ property.city.name }}</span>
+                <span id="city">Capacidad: {{ property.max_persons }}</span>
                 <span>{{ property.category }}</span>
             </div>
             <h1 class="title">{{ property.title }}</h1>
@@ -38,4 +49,5 @@
     {% endfor %}
     
 </body>
+<script src="{% static 'js/filter_bar.js' %}"></script>
 </html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/success-error-page.css' %}">
+    <title>HostBooking</title>
+</head>
+<body >
+    <header>
+        <h1><a href="../homescreen/" id="site-title"> HostBooking </a></h1>
+    </header>
+    <div style="text-align: center;  background-color: white; width: 50%; margin: auto; margin-top: 40px; padding: 50px; border-radius: 15px;">
+        <img src="{% static 'img/success.png'%}" alt="" style="width: 250px; margin-bottom: 50px;">
+        <p style="font-weight: bold;">Genial! Has reservado {{property_reserved.name}} con éxito.</p>
+    </div>
+</body>
+</html>

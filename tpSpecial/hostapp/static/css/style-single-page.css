@@ -53,6 +53,7 @@ header{
 
 .container .info-to-send{
   margin-left: 50px;
+  filter: opacity(0.8);
 }
 
 .container .info-to-send form{
@@ -93,4 +94,25 @@ header{
 .container .info-to-send form button:hover{
   background: rgb(173, 255, 173);
   transition: 0.5s ease-out;
+}
+
+.container .info{
+  margin-left: 70px;
+  filter: opacity(0.7);
+}
+
+.container .info p{
+ display: block;
+ margin-top: 15px;
+}
+
+.container .info .img-info{
+  width: 40px;
+  height: 40px;
+}
+
+
+#site-title{
+  color: white;
+  text-decoration: none;
 }

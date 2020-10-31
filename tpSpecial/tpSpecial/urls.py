@@ -25,6 +25,8 @@ urlpatterns = [
     path('properties/', views.list_properties),
     path('homescreen/', views.homescreen),
     path('property_page/', views.property_page),
+    path('success/',views.success),
+    path('error/',views.error)
     path('reservation/', views.reservation)
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
