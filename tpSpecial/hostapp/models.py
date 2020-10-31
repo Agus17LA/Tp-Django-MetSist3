@@ -101,7 +101,7 @@ class ReservationDate(models.Model):
 
     def __str__(self):
         # puse mal los 2 puntitos pero ya es muy tarde para cambiarlo sin causar una catastrofe
-        return self.date.strftime("%Y:%m:%d")
+        return self.date.strftime("%Y-%m-%d")
 
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades
 # TODO tmb falta ver como manejar exactamente las fechas

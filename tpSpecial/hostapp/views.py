@@ -32,8 +32,10 @@ def list_properties(request):
 def property_page(request):
     if request.GET["id_property"]:
         id_property = request.GET["id_property"]
+        reservations_date_list = ReservationDate.objects.filter(property__id=request.GET["id_property"]).filter(
+            reservation__id=None).order_by('date')
         property_aux = Property.objects.get(id=id_property)
-        return render(request, template_name="property_page.html", context={'property_aux': property_aux})
+        return render(request, template_name="property_page.html", context={'property_aux': property_aux, 'available_dates':reservations_date_list})
 
 
 def success(request, property_aux):
@@ -61,8 +63,8 @@ def reservation(request):
         # separa en una lista al rango de fechas
         daterange_array = request.POST['daterange'].split(' - ')
         # transforma al formato de la base de datos
-        initial_date = datetime.datetime.strptime(daterange_array[0], '%m/%d/%Y').strftime('%Y:%m:%d')
-        final_date = datetime.datetime.strptime(daterange_array[1], '%m/%d/%Y').strftime('%Y:%m:%d')
+        initial_date = datetime.datetime.strptime(daterange_array[0], '%m/%d/%Y').strftime('%Y-%m-%d')
+        final_date = datetime.datetime.strptime(daterange_array[1], '%m/%d/%Y').strftime('%Y-%m-%d')
         try:
             print("print antes del get")
             property_aux = Property.objects.filter(id=request.POST["property_id"])
