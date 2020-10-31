@@ -91,12 +91,16 @@ class Reservation(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
     final_price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(1)])
     code = models.CharField(null=True, max_length=50, verbose_name="El codigo de la reserva")
+    date_of_reservation = models.DateField(default="2020-10-31", null=True)
 
 
 class ReservationDate(models.Model):
     property = models.ForeignKey(Property, on_delete=models.CASCADE)
-    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank=True, editable= False)
+    reservation = models.ForeignKey(Reservation, on_delete=models.CASCADE, null=True, blank=True, editable=True)
     date = models.DateField(default="1998-7-27", null=True)
+
+    def __str__(self):
+        return self.date.strftime("%Y:%m:%d")
 
 # TODO decidir el tamaño de las imagenes y ver q se tome el id del logeado en ADMIN para agregar propiedades
 # TODO tmb falta ver como manejar exactamente las fechas
