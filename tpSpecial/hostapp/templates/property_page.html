@@ -13,12 +13,13 @@
 </head>
 <body>
     <header>
-        <h1>HostBooking</h1>
+        <h1> <a href="../homescreen/" id="site-title"> HostBooking </a></h1>
     </header>
     <div class="container">
         <div class="img-container">
             <img src="{{ property_aux.image.url }}" alt="">
         </div>
+        
         <div class="info-to-send">
             <h2>{{ property_aux.title }}</h2>
             <form action="../reservation/" method="POST">
@@ -34,6 +35,20 @@
             </form>
             <input  id="price-per-day" type="hidden" value="{{property_aux.price_per_day}}">
         </div>
+        <div class="info" style="display:grid; grid-template-columns: 15% 50%; grid-gap: 25px">
+            <img class="img-info" src="{% static 'img/user.png'%}" alt=""><p>{{ property_aux.user.username }}</p>
+            <img class="img-info" src="{% static 'img/city.png'%}" alt=""><p>{{ property_aux.city.name }}</p>
+            <img class="img-info" src="{% static 'img/description.png'%}"  alt=""><p id="description" style="margin-top: 0!important"> {{ property_aux.description }}</p>
+            <img class="img-info" src="{% static 'img/mx-persons.png'%}" alt=""><p>{{ property_aux.max_persons }}</p>
+            <img class="img-info" src="{% static 'img/bedroom.png'%}" alt=""><p>{{ property_aux.bedrooms }}</p>
+            <img class="img-info" src="{% static 'img/bed.png'%}" alt=""><p>{{ property_aux.beds }}</p>
+            <img class="img-info" src="{% static 'img/bathroom.png'%}" alt=""><p>{{ property_aux.bathrooms }}</p>
+        </div>
+        <script>
+            var myDiv = $('#description');
+            myDiv.text(myDiv.text().substring(0,50))
+            myDiv.text(myDiv.text()+" ...");
+        </script>
     </div>
 </body>
     <script>
